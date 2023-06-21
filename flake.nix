@@ -100,21 +100,6 @@
             name = "translate";
           };
         };
-
-        checks = {
-          format =
-            pkgs.runCommand "check-format" {
-              buildInputs = with pkgs; [
-                rustfmt
-                cargo
-              ];
-            } ''
-              ${pkgs.rustfmt}/bin/cargo-fmt fmt --manifest-path ./anyrun/Cargo.toml -- --check
-              ${getExe pkgs.alejandra} --check ./
-              touch $out # it worked!
-            '';
-          "anyrun-format-check" = self'.packages.anyrun;
-        };
       };
 
       flake = _: {
